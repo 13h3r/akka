@@ -61,6 +61,10 @@ private[akka] object Ast {
     override def name = "concatFlatten"
   }
 
+  case class MergeAll(maxSimultaneousInputs: Int) extends AstNode {
+    override def name = "mergeFlatten"
+  }
+
   case class Conflate(seed: Any ⇒ Any, aggregate: (Any, Any) ⇒ Any) extends AstNode {
     override def name = "conflate"
   }

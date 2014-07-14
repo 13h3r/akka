@@ -18,6 +18,8 @@ object FlattenStrategy {
    * consequence that if one of the input stream is infinite, no other streams after that will be consumed from.
    */
   def concat[T]: FlattenStrategy[Publisher[T], T] = Concat[T]()
+  def merge[T](maxSimultaneousInputs: Int = 8): FlattenStrategy[Publisher[T], T] = Merge[T](maxSimultaneousInputs)
 
   private[akka] case class Concat[T]() extends FlattenStrategy[Publisher[T], T]
+  private[akka] case class Merge[T](maxSimultaneousInputs: Int) extends FlattenStrategy[Publisher[T], T]
 }
